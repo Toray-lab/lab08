@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/Toray-lab/lab04.svg?branch=master)](https://travis-ci.org/Toray-lab/lab04)
 [![Build Status](https://travis-ci.org/Toray-lab/lab04.svg?branch=master)](https://travis-ci.org/Toray-lab/lab04)
-!https://app.travis-ci.com/Toray-lab/lab04.svg?token=Lebv9VyVWR2CUJgbvRjy&branch=main!:https://app.travis-ci.com/Toray-lab/lab04
 # Отчёт к лабораторной работе №4
 Устанавливаем переменные окрудения
 ```bash
