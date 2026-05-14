@@ -1,346 +1,472 @@
-[![Build Status](https://travis-ci.org/Toray-lab/lab05.svg?branch=master)](https://travis-ci.org/Toray-lab/lab05)
-[![Build Status](https://travis-ci.org/Toray-lab/lab05.svg?branch=master)](https://travis-ci.org/Toray-lab/lab05)
-# Отчёт к лабораторной работе №4
-Устанавливаем переменные окрудения
+# Отчёт к лабораторной работе №5
+Подготовка окружения
 ```bash
 $ export GITHUB_USERNAME=Toray-lab
-$ export GITHUB_TOKEN=<токен>
-```
-Переходим в рабочую директорию и активируем окружение:
-```bash
+$ export GITHUB_USERNAME=Toray-lab
+$ alias gsed=sed
 $ cd ${GITHUB_USERNAME}/workspace
+$ pushd .
+~/Toray-lab/workspace ~/Toray-lab/workspace
 $ source scripts/activate
 ```
 
-Устанавливаем RVM и Ruby
+Клонирование предыдущей работы и смена remote
 ```bash
-$ \curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
-Turning on ignore dotfiles mode.
-Downloading https://github.com/rvm/rvm/archive/master.tar.gz
-Installing RVM to /home/vlad/.rvm/
-Installation of RVM in /home/vlad/.rvm/ is almost complete:
-
-  * To start using RVM you need to run `source /home/vlad/.rvm/scripts/rvm`
-    in all your open shell windows, in rare cases you need to reopen all shell windows.
-Thanks for installing RVM 🙏
-Please consider donating to our open collective to help us maintain RVM.
-
-👉  Donate: https://opencollective.com/rvm/donate
-
-$ echo "source $HOME/.rvm/scripts/rvm" >> scripts/activate
-$ . scripts/activate
-$ rvm autolibs disable
-$ sudo apt install ruby-full ruby-dev build-essential zlib1g-dev
-ruby-dev is already the newest version (1:3.3+b1).
-zlib1g-dev is already the newest version (1:1.3.dfsg+really1.3.1-1+b1).
-Upgrading:
-  dpkg
-
-Installing:
-  build-essential  ruby-full
-
-Installing dependencies:
-  dpkg-dev                   libdpkg-perl
-  fakeroot                   libfakeroot
-  libalgorithm-diff-perl     libfile-fcntllock-perl
-  libalgorithm-diff-xs-perl  ri
-  libalgorithm-merge-perl
-
-Suggested packages:
-  debian-keyring  debian-tag2upload-keyring  bzr
-
-Summary:
-  Upgrading: 1, Installing: 11, Removing: 0, Not Upgrading: 202
-  Download size: 3,747 kB
-  Space needed: 4,699 kB / 13.7 GB available
-
-Continue? [Y/n] Y
-Get:1 http://deb.debian.org/debian trixie/main amd64 dpkg amd64 1.22.22 [1,537 kB]
-Get:2 http://deb.debian.org/debian trixie/main amd64 libdpkg-perl all 1.22.22 [651 kB]
-Get:3 http://deb.debian.org/debian trixie/main amd64 dpkg-dev all 1.22.22 [1,337 kB]
-Get:4 http://deb.debian.org/debian trixie/main amd64 build-essential amd64 12.12 [4,624 B]
-Get:5 http://deb.debian.org/debian trixie/main amd64 libfakeroot amd64 1.37.1.1-1 [29.6 kB]
-Get:6 http://deb.debian.org/debian trixie/main amd64 fakeroot amd64 1.37.1.1-1 [76.0 kB]
-Get:7 http://deb.debian.org/debian trixie/main amd64 libalgorithm-diff-perl all 1.201-1 [43.3 kB]
-Get:8 http://deb.debian.org/debian trixie/main amd64 libalgorithm-diff-xs-perl amd64 0.04-9 [11.1 kB]
-Get:9 http://deb.debian.org/debian trixie/main amd64 libalgorithm-merge-perl all 0.08-5 [11.8 kB]
-Get:10 http://deb.debian.org/debian trixie/main amd64 libfile-fcntllock-perl amd64 0.22-4+b4 [34.6 kB]
-Get:11 http://deb.debian.org/debian trixie/main amd64 ri all 1:3.3 [5,192 B]
-Get:12 http://deb.debian.org/debian trixie/main amd64 ruby-full all 1:3.3 [5,132 B]
-Fetched 3,747 kB in 2s (2,274 kB/s)
-Reading changelogs... Done
-(Reading database ... 142892 files and directories currently installed.)
-Preparing to unpack .../dpkg_1.22.22_amd64.deb ...
-Unpacking dpkg (1.22.22) over (1.22.21) ...
-Setting up dpkg (1.22.22) ...
-Selecting previously unselected package libdpkg-perl.
-(Reading database ... 142892 files and directories currently installed.)
-Preparing to unpack .../00-libdpkg-perl_1.22.22_all.deb ...
-Unpacking libdpkg-perl (1.22.22) ...
-Selecting previously unselected package dpkg-dev.
-Preparing to unpack .../01-dpkg-dev_1.22.22_all.deb ...
-Unpacking dpkg-dev (1.22.22) ...
-Selecting previously unselected package build-essential.
-Preparing to unpack .../02-build-essential_12.12_amd64.deb ...
-Unpacking build-essential (12.12) ...
-Selecting previously unselected package libfakeroot:amd64.
-Preparing to unpack .../03-libfakeroot_1.37.1.1-1_amd64.deb ...
-Unpacking libfakeroot:amd64 (1.37.1.1-1) ...
-Selecting previously unselected package fakeroot.
-Preparing to unpack .../04-fakeroot_1.37.1.1-1_amd64.deb ...
-Unpacking fakeroot (1.37.1.1-1) ...
-Selecting previously unselected package libalgorithm-diff-perl.
-Preparing to unpack .../05-libalgorithm-diff-perl_1.201-1_all.deb ...
-Unpacking libalgorithm-diff-perl (1.201-1) ...
-Selecting previously unselected package libalgorithm-diff-xs-perl.
-Preparing to unpack .../06-libalgorithm-diff-xs-perl_0.04-9_amd64.deb ...
-Unpacking libalgorithm-diff-xs-perl (0.04-9) ...
-Selecting previously unselected package libalgorithm-merge-perl.
-Preparing to unpack .../07-libalgorithm-merge-perl_0.08-5_all.deb ...
-Unpacking libalgorithm-merge-perl (0.08-5) ...
-Selecting previously unselected package libfile-fcntllock-perl.
-Preparing to unpack .../08-libfile-fcntllock-perl_0.22-4+b4_amd64.deb ...
-Unpacking libfile-fcntllock-perl (0.22-4+b4) ...
-Selecting previously unselected package ri.
-Preparing to unpack .../09-ri_1%3a3.3_all.deb ...
-Unpacking ri (1:3.3) ...
-Selecting previously unselected package ruby-full.
-Preparing to unpack .../10-ruby-full_1%3a3.3_all.deb ...
-Unpacking ruby-full (1:3.3) ...
-Setting up libfile-fcntllock-perl (0.22-4+b4) ...
-Setting up libalgorithm-diff-perl (1.201-1) ...
-Setting up ri (1:3.3) ...
-Setting up libfakeroot:amd64 (1.37.1.1-1) ...
-Setting up fakeroot (1.37.1.1-1) ...
-update-alternatives: using /usr/bin/fakeroot-sysv to provide /usr/bin/fakeroot (fakeroot) in auto mode
-Setting up libdpkg-perl (1.22.22) ...
-Setting up ruby-full (1:3.3) ...
-Setting up libalgorithm-diff-xs-perl (0.04-9) ...
-Setting up libalgorithm-merge-perl (0.08-5) ...
-Setting up dpkg-dev (1.22.22) ...
-Setting up build-essential (12.12) ...
-Processing triggers for man-db (2.13.1-1) ...
-Processing triggers for libc-bin (2.41-12+deb13u2) ...
-
-$ gem install travis --user-install
-Fetching net-http-pipeline-1.0.1.gem
-Fetching connection_pool-3.0.2.gem
-Fetching net-http-persistent-4.0.8.gem
-Fetching multi_json-1.21.1.gem
-Fetching ffi-1.17.4-x86_64-linux-gnu.gem
-Fetching ethon-0.18.0.gem
-Fetching typhoeus-1.6.0.gem
-Fetching faraday-net_http-3.0.2.gem
-Fetching faraday-2.7.12.gem
-Fetching faraday-typhoeus-2.0.0.gem
-Fetching faraday-retry-2.4.0.gem
-Fetching public_suffix-7.0.5.gem
-Fetching addressable-2.9.0.gem
-Fetching concurrent-ruby-1.3.6.gem
-Fetching tzinfo-2.0.6.gem
-Fetching prism-1.9.0.gem
-Fetching minitest-6.0.6.gem
-Fetching i18n-1.14.8.gem
-Fetching activesupport-7.0.10.gem
-Fetching travis-gh-0.21.0.gem
-Fetching rack-3.2.6.gem
-Fetching rack-test-2.1.0.gem
-Fetching websocket-1.2.11.gem
-Fetching pusher-client-0.6.2.gem
-Fetching travis-1.14.0.gem
-Fetching launchy-2.5.2.gem
-Fetching json_pure-2.6.3.gem
-Fetching highline-2.1.0.gem
-Fetching faraday-rack-2.1.3.gem
-Successfully installed net-http-pipeline-1.0.1
-Successfully installed connection_pool-3.0.2
-Successfully installed net-http-persistent-4.0.8
-Successfully installed multi_json-1.21.1
-Successfully installed ffi-1.17.4-x86_64-linux-gnu
-Successfully installed ethon-0.18.0
-Successfully installed typhoeus-1.6.0
-Successfully installed faraday-net_http-3.0.2
-Successfully installed faraday-2.7.12
-Successfully installed faraday-typhoeus-2.0.0
-Successfully installed faraday-retry-2.4.0
-Successfully installed public_suffix-7.0.5
-Successfully installed addressable-2.9.0
-Successfully installed concurrent-ruby-1.3.6
-Successfully installed tzinfo-2.0.6
-Building native extensions. This could take a while...
-Successfully installed prism-1.9.0
-WARNING:  You don't have /home/vlad/.local/share/gem/ruby/3.3.0/bin in your PATH,
-          gem executables (minitest) will not run.
-Successfully installed minitest-6.0.6
-Successfully installed i18n-1.14.8
-Successfully installed activesupport-7.0.10
-Successfully installed travis-gh-0.21.0
-Successfully installed rack-3.2.6
-Successfully installed rack-test-2.1.0
-Successfully installed websocket-1.2.11
-Successfully installed pusher-client-0.6.2
-WARNING:  You don't have /home/vlad/.local/share/gem/ruby/3.3.0/bin in your PATH,
-          gem executables (launchy) will not run.
-Successfully installed launchy-2.5.2
-Successfully installed json_pure-2.6.3
-Successfully installed highline-2.1.0
-Successfully installed faraday-rack-2.1.3
-WARNING:  You don't have /home/vlad/.local/share/gem/ruby/3.3.0/bin in your PATH,
-          gem executables (travis) will not run.
-Successfully installed travis-1.14.0
-Parsing documentation for net-http-pipeline-1.0.1
-Installing ri documentation for net-http-pipeline-1.0.1
-Parsing documentation for connection_pool-3.0.2
-Installing ri documentation for connection_pool-3.0.2
-Parsing documentation for net-http-persistent-4.0.8
-Installing ri documentation for net-http-persistent-4.0.8
-Parsing documentation for multi_json-1.21.1
-Installing ri documentation for multi_json-1.21.1
-Parsing documentation for ffi-1.17.4-x86_64-linux-gnu
-Installing ri documentation for ffi-1.17.4-x86_64-linux-gnu
-Parsing documentation for ethon-0.18.0
-Installing ri documentation for ethon-0.18.0
-Parsing documentation for typhoeus-1.6.0
-Installing ri documentation for typhoeus-1.6.0
-Parsing documentation for faraday-net_http-3.0.2
-Installing ri documentation for faraday-net_http-3.0.2
-Parsing documentation for faraday-2.7.12
-Installing ri documentation for faraday-2.7.12
-Parsing documentation for faraday-typhoeus-2.0.0
-Installing ri documentation for faraday-typhoeus-2.0.0
-Parsing documentation for faraday-retry-2.4.0
-Installing ri documentation for faraday-retry-2.4.0
-Parsing documentation for public_suffix-7.0.5
-Installing ri documentation for public_suffix-7.0.5
-Parsing documentation for addressable-2.9.0
-Installing ri documentation for addressable-2.9.0
-Parsing documentation for concurrent-ruby-1.3.6
-Installing ri documentation for concurrent-ruby-1.3.6
-Parsing documentation for tzinfo-2.0.6
-Installing ri documentation for tzinfo-2.0.6
-Parsing documentation for prism-1.9.0
-Installing ri documentation for prism-1.9.0
-Parsing documentation for minitest-6.0.6
-Installing ri documentation for minitest-6.0.6
-Parsing documentation for i18n-1.14.8
-Installing ri documentation for i18n-1.14.8
-Parsing documentation for activesupport-7.0.10
-Installing ri documentation for activesupport-7.0.10
-Parsing documentation for travis-gh-0.21.0
-Installing ri documentation for travis-gh-0.21.0
-Parsing documentation for rack-3.2.6
-Installing ri documentation for rack-3.2.6
-Parsing documentation for rack-test-2.1.0
-Installing ri documentation for rack-test-2.1.0
-Parsing documentation for websocket-1.2.11
-Installing ri documentation for websocket-1.2.11
-Parsing documentation for pusher-client-0.6.2
-Installing ri documentation for pusher-client-0.6.2
-Parsing documentation for launchy-2.5.2
-Installing ri documentation for launchy-2.5.2
-Parsing documentation for json_pure-2.6.3
-Installing ri documentation for json_pure-2.6.3
-Parsing documentation for highline-2.1.0
-Installing ri documentation for highline-2.1.0
-Parsing documentation for faraday-rack-2.1.3
-Installing ri documentation for faraday-rack-2.1.3
-Parsing documentation for travis-1.14.0
-Installing ri documentation for travis-1.14.0
-Done installing documentation for net-http-pipeline, connection_pool, net-http-persistent, multi_json, ffi, ethon, typhoeus, faraday-net_http, faraday, faraday-typhoeus, faraday-retry, public_suffix, addressable, concurrent-ruby, tzinfo, prism, minitest, i18n, activesupport, travis-gh, rack, rack-test, websocket, pusher-client, launchy, json_pure, highline, faraday-rack, travis after 66 seconds
-29 gems installed
-```
-
-Клонируем предыдущую работу (lab03) как основу для lab05:
-```bash
-$ git clone https://github.com/${GITHU
-B_USERNAME}/lab03- projects/lab05
+$ git clone https://github.com/${GITHUB_USERNAME}/lab04 projects/lab05
 Cloning into 'projects/lab05'...
-remote: Enumerating objects: 6, done.
-remote: Counting objects: 100% (6/6), done.
-remote: Compressing objects: 100% (3/3), done.
-remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
-Receiving objects: 100% (6/6), 4.44 KiB | 758.00 KiB/s, done.
-
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (12/12), done.
+remote: Total 16 (delta 2), reused 10 (delta 1), pack-reused 0 (from 0)
+Receiving objects: 100% (16/16), 10.67 KiB | 3.56 MiB/s, done.
+Resolving deltas: 100% (2/2), done.
 $ cd projects/lab05
 $ git remote remove origin
 $ git remote add origin https://github.com/${GITHUB_USERNAME}/lab05
 ```
 
-Создаём файл .travis.yml:
+Добавление GTest
 ```bash
-$ cat > .travis.yml <<EOF
-language: cpp
-EOF
-$ cat >> .travis.yml <<EOF
+$ mkdir third-party
+$ git submodule add https://github.com/google/googletest third-party/gtest
+Cloning into '/home/vlad/Toray-lab/workspace/projects/lab05/third-party/gtest'...
+remote: Enumerating objects: 28627, done.
+remote: Counting objects: 100% (64/64), done.
+remote: Compressing objects: 100% (48/48), done.
+remote: Total 28627 (delta 32), reused 16 (delta 16), pack-reused 28563 (from 2)
+Receiving objects: 100% (28627/28627), 13.78 MiB | 6.16 MiB/s, done.
+Resolving deltas: 100% (21268/21268), done.
+$ cd third-party/gtest && git checkout release-1.8.1 && cd ../..
+Note: switching to 'release-1.8.1'.
 
-script:
-- cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
-- cmake --build _build
-- cmake --build _build --target install
-EOF
-$ cat >> .travis.yml <<EOF
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
 
-addons:
-  apt:
-    sources:
-      - george-edison55-precise-backports
-    packages:
-      - cmake
-      - cmake-data
-EOF
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 2fe3bd99 Merge pull request #1433 from dsacre/fix-clang-warnings
+$ git add third-party/gtest
+$ git commit -m"added gtest framework"
+[main 6525442] added gtest framework
+ 2 files changed, 4 insertions(+)
+ create mode 100644 .gitmodules
+ create mode 160000 third-party/gtest
 ```
-Авторизуемся в Travis CLI и проверяем конфигурацию:
+
+Настройка CMakeLists.txt для поддержки тестов
 ```bash
-$ travis login --github-token ${GITHUB_TOKEN}
-Successfully logged in as Toray-lab!
+$ gsed -i '/option(BUILD_EXAMPLES "Build examples" OFF)/a\
+> option(BUILD_TESTS "Build tests" OFF)
+> ' CMakeLists.txt
+
+$ cat >> CMakeLists.txt <<EOF
+>
+> if(BUILD_TESTS)
+>   enable_testing()
+>   add_subdirectory(third-party/gtest)
+>   file(GLOB \${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
+>   add_executable(check \${\${PROJECT_NAME}_TEST_SOURCES})
+>   target_link_libraries(check \${PROJECT_NAME} gtest_main)
+>   add_test(NAME check COMMAND check)
+> endif()
+> EOF
+```
+
+Создание теста
+```bash
+$ mkdir tests
+$ cat > tests/test1.cpp <<EOF
+> #include <print.hpp>
+> #include <gtest/gtest.h>
+>
+> TEST(Print, InFileStream)
+> {
+>   std::string filepath = "file.txt";
+>   std::string text = "hello";
+>   std::ofstream out{filepath};
+>   print(text, out);
+>   out.close();
+>
+>   std::string result;
+>   std::ifstream in{filepath};
+>   in >> result;
+>
+>   EXPECT_EQ(result, text);
+> }
+> EOF
+```
+
+Сборка и запуск тестов
+```bash
+$ cmake -H. -B_build -DBUILD_TESTS=ON
+CMake Warning (dev) in CMakeLists.txt:
+  No project() command is present.  The top-level CMakeLists.txt file must
+  contain a literal, direct call to the project() command.  Add a line of
+  code such as
+
+    project(ProjectName)
+
+  near the top of the file, but after cmake_minimum_required().
+
+  CMake is pretending there is a "project(Project)" command on the first
+  line.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) in CMakeLists.txt:
+  cmake_minimum_required() should be called prior to this top-level project()
+  call.  Please see the cmake-commands(7) manual for usage documentation of
+  both commands.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- The C compiler identification is GNU 14.2.0
+-- The CXX compiler identification is GNU 14.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Deprecation Warning at third-party/gtest/CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at third-party/gtest/googlemock/CMakeLists.txt:42 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Deprecation Warning at third-party/gtest/googletest/CMakeLists.txt:49 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+CMake Warning (dev) at third-party/gtest/googletest/cmake/internal_utils.cmake:239 (find_package):
+  Policy CMP0148 is not set: The FindPythonInterp and FindPythonLibs modules
+  are removed.  Run "cmake --help-policy CMP0148" for policy details.  Use
+  the cmake_policy command to set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  third-party/gtest/googletest/CMakeLists.txt:84 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found PythonInterp: /usr/bin/python3 (found version "3.13.5")
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+CMake Warning (dev) in CMakeLists.txt:
+  No cmake_minimum_required command is present.  A line of code such as
+
+    cmake_minimum_required(VERSION 3.31)
+
+  should be added at the top of the file.  The version specified may be lower
+  if you wish to support older CMake versions for this project.  For more
+  information run "cmake --help-policy CMP0000".
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done (3.4s)
+CMake Warning (dev) at CMakeLists.txt:7 (add_executable):
+  Policy CMP0003 should be set before this line.  Add code such as
+
+    if(COMMAND cmake_policy)
+      cmake_policy(SET CMP0003 NEW)
+    endif(COMMAND cmake_policy)
+
+  as early as possible but after the most recent call to
+  cmake_minimum_required or cmake_policy(VERSION).  This warning appears
+  because target "check" links to some libraries for which the linker must
+  search:
+
+    Project
+
+  and other libraries with known full path:
+
+    /home/vlad/Toray-lab/workspace/projects/lab05/_build/third-party/gtest/googlemock/gtest/libgtest_main.a
+
+  CMake is adding directories in the second list to the linker search path in
+  case they are needed to find libraries from the first list (for backwards
+  compatibility with CMake 2.4).  Set policy CMP0003 to OLD or NEW to enable
+  or disable this behavior explicitly.  Run "cmake --help-policy CMP0003" for
+  more information.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Generating done (0.0s)
+-- Build files have been written to: /home/vlad/Toray-lab/workspace/projects/lab05/_build
+$ cmake --build _build
+[ 16%] Built target print
+[ 33%] Built target gtest
+[ 50%] Built target gtest_main
+[ 58%] Building CXX object CMakeFiles/check.dir/tests/test1.cpp.o
+[ 66%] Linking CXX executable check
+[ 66%] Built target check
+[ 75%] Building CXX object third-party/gtest/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o
+[ 83%] Linking CXX static library libgmock.a
+[ 83%] Built target gmock
+[ 91%] Building CXX object third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o
+[100%] Linking CXX static library libgmock_main.a
+[100%] Built target gmock_main
+$ cmake --build _build --target test
+Running tests...
+Test project /home/vlad/Toray-lab/workspace/projects/lab05/_build
+    Start 1: check
+1/1 Test #1: check ............................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.02 sec
+$ _build/check
+Running main() from /home/vlad/Toray-lab/workspace/projects/lab05/third-party/gtest/googletest/src/gtest_main.cc
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Print
+[ RUN      ] Print.InFileStream
+[       OK ] Print.InFileStream (0 ms)
+[----------] 1 test from Print (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (0 ms total)
+[  PASSED  ] 1 test.
+$ cmake --build _build --target test -- ARGS=--verbose
+Running tests...
+UpdateCTestConfiguration  from :/home/vlad/Toray-lab/workspace/projects/lab05/_build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/vlad/Toray-lab/workspace/projects/lab05/_build/DartConfiguration.tcl
+Test project /home/vlad/Toray-lab/workspace/projects/lab05/_build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: check
+
+1: Test command: /home/vlad/Toray-lab/workspace/projects/lab05/_build/check
+1: Working Directory: /home/vlad/Toray-lab/workspace/projects/lab05/_build
+1: Test timeout computed to be: 10000000
+1: Running main() from /home/vlad/Toray-lab/workspace/projects/lab05/third-party/gtest/googletest/src/gtest_main.cc
+1: [==========] Running 1 test from 1 test case.
+1: [----------] Global test environment set-up.
+1: [----------] 1 test from Print
+1: [ RUN      ] Print.InFileStream
+1: [       OK ] Print.InFileStream (1 ms)
+1: [----------] 1 test from Print (1 ms total)
+1:
+1: [----------] Global test environment tear-down
+1: [==========] 1 test from 1 test case ran. (1 ms total)
+1: [  PASSED  ] 1 test.
+1/1 Test #1: check ............................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.02 sec
+```
+
+Обновление документации и CI
+```bash
+$ gsed -i 's/lab04/lab05/g' README.md
+$ gsed -i 's/\(DCMAKE_INSTALL_PREFIX=_install\)/\1 -DBUILD_TESTS=ON/' .travis.yml
+$ gsed -i '/cmake --build _build --target install/a\
+> - cmake --build _build --target test -- ARGS=--verbose
+> ' .travis.yml
+```
+
+Проверяем конфигурацию Travis, коммитим, пушим
+```bash
 $ travis lint
 Hooray, .travis.yml looks valid :)
-```
-Добавляем значок Travis CI в README.md (используем ex для вставки в первую строку):
-```bash
-$ ex -sc '1i|[![Build Status](https://travis-ci.org/'${GITHUB_USERNAME}'/lab05.svg?branch=master)](https://travis-ci.org/'${GITHUB_USERNAME}'/lab05)' -cx README.md
-```
+$ git add .travis.yml tests
+$ git add -p
+$ git commit -m"added tests"
+[main 4f4e15d] added tests
+ 135 files changed, 13365 insertions(+), 10 deletions(-)
+ create mode 100644 CMakeLists.txt
+ create mode 100644 _build/CMakeCache.txt
+ create mode 100644 _build/CMakeFiles/3.31.6/CMakeCCompiler.cmake
+ create mode 100644 _build/CMakeFiles/3.31.6/CMakeCXXCompiler.cmake
+ create mode 100755 _build/CMakeFiles/3.31.6/CMakeDetermineCompilerABI_C.bin
+ create mode 100755 _build/CMakeFiles/3.31.6/CMakeDetermineCompilerABI_CXX.bin
+ create mode 100644 _build/CMakeFiles/3.31.6/CMakeSystem.cmake
+ create mode 100644 _build/CMakeFiles/3.31.6/CompilerIdC/CMakeCCompilerId.c
+ create mode 100755 _build/CMakeFiles/3.31.6/CompilerIdC/a.out
+ create mode 100644 _build/CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.cpp
+ create mode 100755 _build/CMakeFiles/3.31.6/CompilerIdCXX/a.out
+ create mode 100644 _build/CMakeFiles/CMakeConfigureLog.yaml
+ create mode 100644 _build/CMakeFiles/CMakeDirectoryInformation.cmake
+ create mode 100644 _build/CMakeFiles/Makefile.cmake
+ create mode 100644 _build/CMakeFiles/Makefile2
+ create mode 100644 _build/CMakeFiles/TargetDirectories.txt
+ create mode 100644 _build/CMakeFiles/check.dir/DependInfo.cmake
+ create mode 100644 _build/CMakeFiles/check.dir/build.make
+ create mode 100644 _build/CMakeFiles/check.dir/cmake_clean.cmake
+ create mode 100644 _build/CMakeFiles/check.dir/compiler_depend.internal
+ create mode 100644 _build/CMakeFiles/check.dir/compiler_depend.make
+ create mode 100644 _build/CMakeFiles/check.dir/compiler_depend.ts
+ create mode 100644 _build/CMakeFiles/check.dir/depend.make
+ create mode 100644 _build/CMakeFiles/check.dir/flags.make
+ create mode 100644 _build/CMakeFiles/check.dir/link.d
+ create mode 100644 _build/CMakeFiles/check.dir/link.txt
+ create mode 100644 _build/CMakeFiles/check.dir/progress.make
+ create mode 100644 _build/CMakeFiles/check.dir/tests/test1.cpp.o
+ create mode 100644 _build/CMakeFiles/check.dir/tests/test1.cpp.o.d
+ create mode 100644 _build/CMakeFiles/cmake.check_cache
+ create mode 100644 _build/CMakeFiles/print.dir/DependInfo.cmake
+ create mode 100644 _build/CMakeFiles/print.dir/build.make
+ create mode 100644 _build/CMakeFiles/print.dir/cmake_clean.cmake
+ create mode 100644 _build/CMakeFiles/print.dir/cmake_clean_target.cmake
+ create mode 100644 _build/CMakeFiles/print.dir/compiler_depend.internal
+ create mode 100644 _build/CMakeFiles/print.dir/compiler_depend.make
+ create mode 100644 _build/CMakeFiles/print.dir/compiler_depend.ts
+ create mode 100644 _build/CMakeFiles/print.dir/depend.make
+ create mode 100644 _build/CMakeFiles/print.dir/flags.make
+ create mode 100644 _build/CMakeFiles/print.dir/link.txt
+ create mode 100644 _build/CMakeFiles/print.dir/progress.make
+ create mode 100644 _build/CMakeFiles/print.dir/src/print.cpp.o
+ create mode 100644 _build/CMakeFiles/print.dir/src/print.cpp.o.d
+ create mode 100644 _build/CMakeFiles/progress.marks
+ create mode 100644 _build/CTestTestfile.cmake
+ create mode 100644 _build/Makefile
+ create mode 100644 _build/Testing/Temporary/CTestCostData.txt
+ create mode 100644 _build/Testing/Temporary/LastTest.log
+ create mode 100755 _build/check
+ create mode 100644 _build/cmake_install.cmake
+ create mode 100644 _build/file.txt
+ create mode 100644 _build/libprint.a
+ create mode 100644 _build/third-party/gtest/CMakeFiles/CMakeDirectoryInformation.cmake
+ create mode 100644 _build/third-party/gtest/CMakeFiles/progress.marks
+ create mode 100644 _build/third-party/gtest/CTestTestfile.cmake
+ create mode 100644 _build/third-party/gtest/Makefile
+ create mode 100644 _build/third-party/gtest/cmake_install.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/CMakeDirectoryInformation.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/build.make
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/cmake_clean.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/cmake_clean_target.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/compiler_depend.make
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/compiler_depend.ts
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/depend.make
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/flags.make
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/link.txt
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/progress.make
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o.d
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/DependInfo.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/build.make
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/cmake_clean.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/cmake_clean_target.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/compiler_depend.make
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/compiler_depend.ts
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/depend.make
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/flags.make
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/link.txt
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/progress.make
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o.d
+ create mode 100644 _build/third-party/gtest/googlemock/CMakeFiles/progress.marks
+ create mode 100644 _build/third-party/gtest/googlemock/CTestTestfile.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/Makefile
+ create mode 100644 _build/third-party/gtest/googlemock/cmake_install.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/CMakeDirectoryInformation.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/Export/0c08b8e77dd885bfe55a19a9659d9fc1/GTestTargets-noconfig.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/Export/0c08b8e77dd885bfe55a19a9659d9fc1/GTestTargets.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/DependInfo.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/build.make
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/cmake_clean.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/cmake_clean_target.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/compiler_depend.internal
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/compiler_depend.make
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/compiler_depend.ts
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/depend.make
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/flags.make
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/link.txt
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/progress.make
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o.d
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/DependInfo.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/cmake_clean.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/cmake_clean_target.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/compiler_depend.internal
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/compiler_depend.make
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/compiler_depend.ts
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/depend.make
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/flags.make
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/link.txt
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/progress.make
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.d
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CMakeFiles/progress.marks
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/CTestTestfile.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/Makefile
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/cmake_install.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/generated/GTestConfig.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/generated/GTestConfigVersion.cmake
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/generated/gmock.pc
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/generated/gmock_main.pc
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/generated/gtest.pc
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/generated/gtest_main.pc
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/libgtest.a
+ create mode 100644 _build/third-party/gtest/googlemock/gtest/libgtest_main.a
+ create mode 100644 _build/third-party/gtest/googlemock/libgmock.a
+ create mode 100644 _build/third-party/gtest/googlemock/libgmock_main.a
+ create mode 100644 file.txt
+ create mode 100644 include/print.hpp
+ create mode 100644 src/print.cpp
+ create mode 100644 tests/test1.cpp
+$ git push main
+Username for 'https://github.com': Toray-lab
+Password for 'https://Toray-lab@github.com':
+Everything up-to-date
+$ travis login --auto
+/home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/cli/command.rb:334:in `format': wrong number of arguments (given 5, expected 1..3) (ArgumentError)
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/cli/command.rb:315:in `store_error'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/cli/command.rb:235:in `rescue in execute'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/cli/command.rb:200:in `execute'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/cli.rb:66:in `run'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/bin/travis:21:in `<top (required)>'
+        from /usr/local/bin/travis:25:in `load'
+        from /usr/local/bin/travis:25:in `<main>'
+/home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/tools/github.rb:91:in `hub_tokens': undefined method `each' for nil (NoMethodError)
 
-Коммитим изменения и пушим:
-```bash
-$ git add .travis.yml README.md
-$ git commit -m "added CI"
-[main ce86d18] added CI
- 2 files changed, 8 insertions(+)
- create mode 100644 .travis.yml
-$ git push origin main
-```
-
-Проверяем Travis CI:
-```bash
-$ travis lint
-Hooray, .travis.yml looks valid :)
-```
-
-Просматриваем аккаунты, синхронизируем и включаем репозиторий:
-```bash
-$ travis accounts
-Toray-lab (Toray-lab): not subscribed, 20 repositories
-To set up a subscription, please visit app.travis-ci.com.
-$ travis sync
-synchronizing: . done
-$ travis repos
-Toray-lab/DZ2 /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/command.rb:334:in `format': wrong number of arguments (given 5, expected 1..3) (ArgumentError)
-        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/command.rb:315:in `store_error'
-        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/command.rb:235:in `rescue in execute'
-        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/command.rb:200:in `execute'
-        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli.rb:66:in `run'
-        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/bin/travis:21:in `<top (required)>'
-        from /home/vlad/.local/share/gem/ruby/3.3.0/bin/travis:25:in `load'
-        from /home/vlad/.local/share/gem/ruby/3.3.0/bin/travis:25:in `<main>'
-/home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/repos.rb:23:in `block in run': can't modify frozen String: "(" (FrozenError)
-        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/repos.rb:18:in `each'
-        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/repos.rb:18:in `run'
-        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/command.rb:208:in `execute'
-        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli.rb:66:in `run'
-        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/bin/travis:21:in `<top (required)>'
-        from /home/vlad/.local/share/gem/ruby/3.3.0/bin/travis:25:in `load'
-        from /home/vlad/.local/share/gem/ruby/3.3.0/bin/travis:25:in `<main>'
+        hub.fetch(host, []).each do |entry|
+                           ^^^^^
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/tools/github.rb:58:in `possible_tokens'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/tools/github.rb:42:in `each_token'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/tools/github.rb:37:in `with_token'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/cli/login.rb:30:in `login'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/cli/login.rb:52:in `run'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/cli/command.rb:208:in `execute'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/lib/travis/cli.rb:66:in `run'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/gems/travis-1.14.0/bin/travis:21:in `<top (required)>'
+        from /usr/local/bin/travis:25:in `load'
+        from /usr/local/bin/travis:25:in `<main>'
 $ travis enable
+Detected repository as Toray-lab/lab05, is this correct? |yes| yes
 Toray-lab/lab05: enabled :)
+$ mkdir artifacts
 ```
