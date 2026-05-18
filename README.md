@@ -12,24 +12,24 @@ $ source scripts/activate
 
 Клонирование предыдущей работы и смена remote
 ```bash
-$ git clone https://github.com/${GITHUB_USERNAME}/lab04 projects/lab05
-Cloning into 'projects/lab05'...
+$ git clone https://github.com/${GITHUB_USERNAME}/lab04 projects/lab06
+Cloning into 'projects/lab06'...
 remote: Enumerating objects: 16, done.
 remote: Counting objects: 100% (16/16), done.
 remote: Compressing objects: 100% (12/12), done.
 remote: Total 16 (delta 2), reused 10 (delta 1), pack-reused 0 (from 0)
 Receiving objects: 100% (16/16), 10.67 KiB | 3.56 MiB/s, done.
 Resolving deltas: 100% (2/2), done.
-$ cd projects/lab05
+$ cd projects/lab06
 $ git remote remove origin
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab05
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab06
 ```
 
 Добавление GTest
 ```bash
 $ mkdir third-party
 $ git submodule add https://github.com/google/googletest third-party/gtest
-Cloning into '/home/vlad/Toray-lab/workspace/projects/lab05/third-party/gtest'...
+Cloning into '/home/vlad/Toray-lab/workspace/projects/lab06/third-party/gtest'...
 remote: Enumerating objects: 28627, done.
 remote: Counting objects: 100% (64/64), done.
 remote: Compressing objects: 100% (48/48), done.
@@ -207,7 +207,7 @@ CMake Warning (dev) at CMakeLists.txt:7 (add_executable):
 
   and other libraries with known full path:
 
-    /home/vlad/Toray-lab/workspace/projects/lab05/_build/third-party/gtest/googlemock/gtest/libgtest_main.a
+    /home/vlad/Toray-lab/workspace/projects/lab06/_build/third-party/gtest/googlemock/gtest/libgtest_main.a
 
   CMake is adding directories in the second list to the linker search path in
   case they are needed to find libraries from the first list (for backwards
@@ -217,7 +217,7 @@ CMake Warning (dev) at CMakeLists.txt:7 (add_executable):
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- Generating done (0.0s)
--- Build files have been written to: /home/vlad/Toray-lab/workspace/projects/lab05/_build
+-- Build files have been written to: /home/vlad/Toray-lab/workspace/projects/lab06/_build
 $ cmake --build _build
 [ 16%] Built target print
 [ 33%] Built target gtest
@@ -233,7 +233,7 @@ $ cmake --build _build
 [100%] Built target gmock_main
 $ cmake --build _build --target test
 Running tests...
-Test project /home/vlad/Toray-lab/workspace/projects/lab05/_build
+Test project /home/vlad/Toray-lab/workspace/projects/lab06/_build
     Start 1: check
 1/1 Test #1: check ............................   Passed    0.01 sec
 
@@ -241,7 +241,7 @@ Test project /home/vlad/Toray-lab/workspace/projects/lab05/_build
 
 Total Test time (real) =   0.02 sec
 $ _build/check
-Running main() from /home/vlad/Toray-lab/workspace/projects/lab05/third-party/gtest/googletest/src/gtest_main.cc
+Running main() from /home/vlad/Toray-lab/workspace/projects/lab06/third-party/gtest/googletest/src/gtest_main.cc
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from Print
@@ -254,9 +254,9 @@ Running main() from /home/vlad/Toray-lab/workspace/projects/lab05/third-party/gt
 [  PASSED  ] 1 test.
 $ cmake --build _build --target test -- ARGS=--verbose
 Running tests...
-UpdateCTestConfiguration  from :/home/vlad/Toray-lab/workspace/projects/lab05/_build/DartConfiguration.tcl
-UpdateCTestConfiguration  from :/home/vlad/Toray-lab/workspace/projects/lab05/_build/DartConfiguration.tcl
-Test project /home/vlad/Toray-lab/workspace/projects/lab05/_build
+UpdateCTestConfiguration  from :/home/vlad/Toray-lab/workspace/projects/lab06/_build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/vlad/Toray-lab/workspace/projects/lab06/_build/DartConfiguration.tcl
+Test project /home/vlad/Toray-lab/workspace/projects/lab06/_build
 Constructing a list of tests
 Done constructing a list of tests
 Updating test list for fixtures
@@ -266,10 +266,10 @@ Checking test dependency graph end
 test 1
     Start 1: check
 
-1: Test command: /home/vlad/Toray-lab/workspace/projects/lab05/_build/check
-1: Working Directory: /home/vlad/Toray-lab/workspace/projects/lab05/_build
+1: Test command: /home/vlad/Toray-lab/workspace/projects/lab06/_build/check
+1: Working Directory: /home/vlad/Toray-lab/workspace/projects/lab06/_build
 1: Test timeout computed to be: 10000000
-1: Running main() from /home/vlad/Toray-lab/workspace/projects/lab05/third-party/gtest/googletest/src/gtest_main.cc
+1: Running main() from /home/vlad/Toray-lab/workspace/projects/lab06/third-party/gtest/googletest/src/gtest_main.cc
 1: [==========] Running 1 test from 1 test case.
 1: [----------] Global test environment set-up.
 1: [----------] 1 test from Print
@@ -289,7 +289,7 @@ Total Test time (real) =   0.02 sec
 
 Обновление документации и CI
 ```bash
-$ gsed -i 's/lab04/lab05/g' README.md
+$ gsed -i 's/lab04/lab06/g' README.md
 $ gsed -i 's/\(DCMAKE_INSTALL_PREFIX=_install\)/\1 -DBUILD_TESTS=ON/' .travis.yml
 $ gsed -i '/cmake --build _build --target install/a\
 > - cmake --build _build --target test -- ARGS=--verbose
@@ -466,7 +466,7 @@ $ travis login --auto
         from /usr/local/bin/travis:25:in `load'
         from /usr/local/bin/travis:25:in `<main>'
 $ travis enable
-Detected repository as Toray-lab/lab05, is this correct? |yes| yes
-Toray-lab/lab05: enabled :)
+Detected repository as Toray-lab/lab06, is this correct? |yes| yes
+Toray-lab/lab06: enabled :)
 $ mkdir artifacts
 ```
