@@ -3,3 +3,8 @@ script:
 - cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install -DBUILD_TESTS=ON
 - cmake --build _build
 - cmake --build _build --target install
+language: cpp
+services:
+  - docker
+script:
+  - docker build -t logger .
